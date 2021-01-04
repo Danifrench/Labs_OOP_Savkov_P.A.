@@ -4,8 +4,8 @@ namespace OOP_LAB_6
 {
     class Laptop : Good
     {
-        public Laptop(float cost, string id, string procID, int ram, int hdd)
-            : base(cost, id)
+        public Laptop(float cost, string name, string procID, int ram, int hdd)
+            : base(cost, name)
         {
             _procID = procID;
             _ram = ram;
