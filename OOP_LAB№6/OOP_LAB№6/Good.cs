@@ -4,18 +4,27 @@ namespace OOP_LAB_6
 {
 	class Good
 	{
+		public static int count;
+
+		public Good() { }
 		public Good(float cost, string name)
 		{
 			_cost = cost;
 			_name = name;
-			_id = CreateID();
+			count++;
+			_id = count + 100;
 		}
 
-		static int CreateID()
+		public int GetID()
         {
-			Random rnd = new Random();
-			return rnd.Next(100, 999);
-		}
+			return _id;
+        }
+
+		public float GetCost()
+        {
+			return _cost;
+        }
+
 		private float _cost;
 		private int _id;
 		private string _name;
