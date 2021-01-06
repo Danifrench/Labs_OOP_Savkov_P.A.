@@ -2,14 +2,21 @@
 
 namespace OOP_LAB_6
 {
-    class Laptop : Good
+    class Laptop : Product
     {
-        public Laptop(float cost, string name, string procID, int ram, int hdd)
+        public Laptop(int cost, string name, string procID, int ram, int hdd)
             : base(cost, name)
         {
             _procID = procID;
             _ram = ram;
             _hdd = hdd;
+        }
+
+        public override string[] GetField()
+        {
+            string[] items = new string[] { Convert.ToString(_procID), Convert.ToString(_ram), Convert.ToString(_hdd) };
+
+            return items;
         }
 
         private string _procID;

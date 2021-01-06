@@ -5,57 +5,75 @@ namespace OOP_LAB_6
 {
     class Store
     {
+        public Dictionary<int, Product> _goodID;
+
         public Dictionary<int, HashSet<int>> _goodkkal;
-        public Dictionary<float, HashSet<float>> _goodCost;
-        public Dictionary<char, HashSet<char>> _goodSize;
+        public Dictionary<double, HashSet<int>> _goodweight;
+        public Dictionary<int, HashSet<int>> _goodCost;
+        public Dictionary<char, HashSet<int>> _goodSize;
+        public Dictionary<string, HashSet<int>> _goodMaterial;
+        public Dictionary<int, HashSet<int>> _goodRAM;
 
-        public void AddGood(float cost, string name, char wich)
+        public void AddGood(string fields)
         {
-            Good newElement = null;
+            
+            Product newElement = null;
 
-            switch(wich)
+            Factory newFactoryProduct = null;
+            newElement = newFactoryProduct.createGood(fields);
+
+            string[] items = newElement.GetField();
+
+            switch (newElement.GetType().ToString())
             {
-                case 'l':
-                    LaptopFactory NewLaptop = null;
-                    newElement = NewLaptop.createGood(cost, name);
+                case "Greens":
+                    // int kkal = Convert.ToInt32(items[0]);
+                    // double weight = Convert.ToDouble(items[1]);
+
+                    _goodkkal[Convert.ToInt32(items[0])].Add(newElement.GetID);
+                    _goodweight[Convert.ToDouble(items[1])].Add(newElement.GetID);
                     break;
 
-                case 'c':
-                    ClothesFactory NewClothes = null;
-                    newElement = NewClothes.createGood(cost, name);
+                case "Clothes":
+                    // char size = Convert.ToChar(items[3]);
+                    // string material = items[4];
+
+                    _goodSize[Convert.ToChar(items[3])].Add(newElement.GetID);
+                    _goodMaterial[items[4]].Add(newElement.GetID);
                     break;
 
-                case 'g':
-                    GreensFactory NewGreens = null;
-                    newElement = NewGreens.createGood(cost, name);
+                case "Laptop":
+                    // int ram = Convert.ToInt32(items[4]);
+
+                    _goodRAM[Convert.ToInt32(items[4])].Add(newElement.GetID);
                     break;
             }
 
-            int id = newElement.GetID();
-
-            _goodCost[newElement.GetCost()].Add(id);
-            _goodID.Add(id, newElement);
+            _goodCost[newElement.GetCost()].Add(newElement.GetID);
+            _goodID.Add(newElement.GetID, newElement);
         }
 
         public void DeleteGood(int id) 
         {
-            // НЕ ПОНЯТНО КАК РЕШИТЬ ПРОБЛЕМУ
-            // Удалить _goodID по id легко, но
-            // Непонятно как очистить соответствующий элемент 
-            // Т.К невозможно получить поле _kkal из Greens.h 
-            // И поле _size из Clothes.h. Тут логично было бы испольщовать 
-            // итератор, но у него достаточно мало методов. К тому же в классе
-            // Good не вариант написать абстрактную функцию (например GetKkal), которая возвращала бы
-            // значения kkal, например, т.к. прийдется эту функию описывать
-            // в каждом дочернем классе класса Good, что явно бред, но решения
-            // проблемы явного не вижу
-        }
+            string[] items = _goodID[id].GetField();
 
-        public void Changes()
-        {
-            
-        }
+            switch (items[0])
+            {
+                case "Greens":
+                    _goodkkal[Convert.ToInt32(items[0])].Remove(id);
+                    _goodweight[Convert.ToDouble(items[1])].Remove(id);
+                    break;
 
-        public Dictionary<int, Good> _goodID;
+                case "Clothes":
+                    _goodSize[Convert.ToChar(items[3])].Remove(id);
+                    _goodMaterial[items[4]].Remove(id);
+                    break;
+
+                case "Laptop":
+                    _goodRAM[Convert.ToInt32(items[4])].Remove(id);
+                    break;
+            }
+
+        } 
     }
 }

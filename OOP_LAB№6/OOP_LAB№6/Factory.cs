@@ -2,48 +2,32 @@
 
 namespace OOP_LAB_6
 {
-    abstract class Factory
+    class Factory
     {
-        public abstract Good createGood(float cost, string name);
-    }
-
-    class GreensFactory : Factory
-    {
-        public override Good createGood(float cost, string name)
+        public Product createGood(string field)
         {
-            float weight = 0;
-            int kkal = 0;
-            return new Greens(cost, name, weight, kkal);
-        }
-    }
+            string[] items = field.Split();
+            Product newProduct = null;
 
-    class ClothesFactory : Factory
-    {
-        public override Good createGood(float cost, string name)
-        {
-            char size = 'S';
-            string material = "cotton";
+            switch(items[0])
+            {
+                case "Greens":
+                    newProduct = new Greens(Convert.ToInt32(items[2]), items[1],
+                        Convert.ToDouble(items[3]), Convert.ToInt32(items[4]));
+                    break;
 
-            return new Clothes(cost, name, size, material);
-        }
-    }
+                case "Clothes":
+                    newProduct = new Clothes(Convert.ToInt32(items[2]), items[1],
+                        Convert.ToChar(items[3]), items[4]);
+                    break;
 
-    class LaptopFactory : Factory
-    {
-        public override Good createGood(float cost, string name)
-        {
-            string procID = "7701";
-            int ram = 4000;
-            int hdd = 10000;
+                case "Laptop":
+                    newProduct = new Laptop(Convert.ToInt32(items[2]), items[1],
+                        items[3], Convert.ToInt32(items[4]), Convert.ToInt32(items[5]));
+                    break;
+            }
 
-            return new Laptop(cost, name, procID, ram, hdd);
+            return newProduct;
         }
     }
 }
-
-// ввод
-// procID = 11001
-// size 's'
-// hdd = 404
-// kkal = 110
-//
