@@ -4,7 +4,7 @@ namespace OOP_LAB_6
 {
     class Factory
     {
-        public Product createGood(string field)
+        public Product createProduct(string field)
         {
             string[] items = field.Split();
             Product newProduct = null;

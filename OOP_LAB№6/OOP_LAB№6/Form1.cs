@@ -21,5 +21,30 @@ namespace OOP_LAB_6
         {
 
         }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void addElementButton_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void listBoxProducts_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void toolTip1_Popup(object sender, PopupEventArgs e)
+        {
+
+        }
+
+        private void domainUpDown1_SelectedItemChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
